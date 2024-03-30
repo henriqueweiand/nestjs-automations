@@ -1,10 +1,15 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { DevtoolsModule } from '@nestjs/devtools-integration';
+import { HttpModule } from './infra/http/http.module';
+import { PrismaModule } from './infra/persistence/prisma/prisma.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [
+    DevtoolsModule.register({
+      http: process.env.NODE_ENV !== 'production',
+    }),
+    PrismaModule,
+    HttpModule,
+  ],
 })
-export class AppModule {}
+export class AppModule { }
