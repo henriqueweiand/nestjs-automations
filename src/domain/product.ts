@@ -22,4 +22,8 @@ export class Product extends Entity<ProductProps> {
     get price(): number {
         return this.props.price;
     }
+
+    get currentState(): ProductProps {
+        return this.props;
+    }
 }
