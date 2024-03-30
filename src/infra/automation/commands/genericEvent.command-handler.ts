@@ -17,6 +17,7 @@ export class GenericEventCommandHandler
         const actionModuleRef = await this.lazyModuleLoader.load(() =>
             import('../actions/actions.module').then((m) => m.ActionsModule),
         );
+        //  improve organization and segmentation of folders to be to be able to have modules for a better danimyc code 
 
         const actionModule = await import(`../actions/${command.event}`);
         const ActionClass = actionModule.default;

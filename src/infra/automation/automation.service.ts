@@ -19,27 +19,8 @@ export class AutomationService {
     eventEmit<T>(event: string, data: T) {
         const classRef = data.constructor;
 
-        switch (event) {
-            case AutomationEvents.CREATED:
-                return this.commandBus.execute(
-                    new GenericEventCommand<T>(classRef.name.toLowerCase() + '.' + AutomationEvents.CREATED, data)
-                );
-            case AutomationEvents.UPDATED:
-                return this.commandBus.execute(
-                    new GenericEventCommand<T>(classRef.name.toLowerCase() + '.' + AutomationEvents.UPDATED, data)
-                );
-            case AutomationEvents.DELETED:
-                return this.commandBus.execute(
-                    new GenericEventCommand<T>(classRef.name.toLowerCase() + '.' + AutomationEvents.DELETED, data)
-                );
-
-            case AutomationEvents.FIELD_CHANGED:
-                return this.commandBus.execute(
-                    new GenericEventCommand<T>(classRef.name.toLowerCase() + '.' + AutomationEvents.FIELD_CHANGED, data)
-                );
-
-            default:
-                throw new Error('Event not found');
-        }
+        return this.commandBus.execute(
+            new GenericEventCommand<T>(classRef.name.toLowerCase() + '.' + event, data)
+        );
     }
 }
